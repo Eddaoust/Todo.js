@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: #fb1;
+    margin-top: 100px;
+    font-size: 200px;
+}
+
+.todo {
+    width: 50%;
+}
+
+.form-control:disabled {
+    background-color: #fff;
+}
+
+.todo-footer {
+    border: solid 1px #ced4da;
+    border-radius: 5px;
+    padding: 6px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo-footer p {
+    font-size: 12px;
+    margin: 0;
+}
