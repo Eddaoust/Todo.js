@@ -1,42 +1,27 @@
-const todoList = document.getElementsByClassName('content');
+const todoList = document.getElementsByTagName('ul');
 const todoInput = document.getElementById('todo-input');
 
 todoInput.addEventListener('keypress', function(e){
     if(e.keyCode == 13 && todoInput.value != '') {
-        let structure = createStructure(todoInput.value);
-        todoList[0].appendChild(structure);
+        const todoItem = document.createElement('li');
+        todoItem.setAttribute('class', 'list-group-item');
+        todoItem.innerHTML = '';
+        todoItem.innerHTML = '<i class="far fa-circle"></i>' + todoInput.value;
+        todoList[0].appendChild(todoItem);
         todoInput.value = '';
-        const radio = Array.from(document.getElementsByClassName('radio'));
-        for(let item of radio){
-            item.addEventListener('click', function(){
-                const selectedInput = document.getElementsByClassName('selected');
-                selectedInput[radio.indexOf(item)].style.color = '#ced4da';
-                selectedInput[radio.indexOf(item)].style.textDecoration = 'line-through';
-            });
-        }
-    }
-});
 
-function createStructure(todoItem){
-    let div = document.createElement('div');
-    div.setAttribute('class', 'input-group input-group-lg')
-    let div2 = document.createElement('div');
-    div2.setAttribute('class', 'input-group-prepend');
-    let div3 = document.createElement('div');
-    div3.setAttribute('class', 'input-group-text');
-    let radio = document.createElement('input');
-    radio.setAttribute('type', 'radio');
-    radio.setAttribute('class', 'radio');
-    let input = document.createElement('input');
-    input.setAttribute('type', 'text');
-    input.setAttribute('class', 'form-control selected');
-    input.setAttribute('disabled', '');
-    input.setAttribute('value', todoItem);
-
-    div3.appendChild(radio);
-    div2.appendChild(div3);
-    div.appendChild(div2);
-    div.appendChild(input);
-
-    return div;
-}
+        todoList[0].addEventListener('click', function(e){
+            if(e.target.classList.contains('list-group-item')){
+                if(e.target.getAttribute('class')== 'list-group-item'){
+                    e.target.setAttribute('class', 'list-group-item list-is-active');
+                } else {
+                    e.target.setAttribute('class', 'list-group-item');
+                }
+            } 
+        });
+        todoList[0].addEventListener('dblclick', function(e){
+            if(e.target.classList.contains('list-group-item')){
+                e.target.remove();
+            }
+        });
+    }});
